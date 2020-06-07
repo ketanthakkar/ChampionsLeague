@@ -339,7 +339,11 @@ const App = () => {
     semifinalWinner.map((team, index) => {
       
       if(index%2 !== 0) {
-        finalDraw.push(<div>{`${firstTeam} -vs- ${Object.keys(team)[0]}`}</div>);
+
+        let round1Score1 = generateRandom();
+        let round1Score2 = generateRandom();
+        
+        finalDraw.push(<div>{`${firstTeam} -vs- ${Object.keys(team)[0]} ${round1Score1 + ':' + round1Score2}`}</div>);
       }
 
       firstTeam = Object.keys(team)[0];
@@ -386,7 +390,7 @@ const App = () => {
       <div className="groups">
         {renderSemifinalResult()}
       </div>
-      <h3>******** Final Draw *********</h3>
+      <h3>******** Final *********</h3>
       <div className="groups">
         {finalDraw()}
       </div>
