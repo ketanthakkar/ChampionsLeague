@@ -9,6 +9,7 @@ const App = () => {
   let top16 = [];
   let round16Winner = [];
   let quarterFinalWinner = [];
+  let semifinalWinner = [];
   
   const createGroup = () => {
     let temp = [];
@@ -304,6 +305,23 @@ const App = () => {
         let round2Score1 = generateRandom();
         let round2Score2 = generateRandom();
 
+        let tempObj = {};
+
+        if(round1Score1+round2Score1 > round1Score2+round2Score2) {
+          tempObj[`${firstTeam}`] = round1Score1+round2Score1;
+        } else if(round1Score1+round2Score1 < round1Score2+round2Score2) {
+          tempObj[`${Object.keys(team)[0]}`] = round1Score2+round2Score2;
+        } else {
+          if(round2Score2 > round1Score1) {
+            tempObj[`${Object.keys(team)[0]}`] = round1Score2+round2Score2;
+          } else {
+            tempObj[`${firstTeam}`] = round1Score1+round2Score1;
+          }
+          console.log("Extra condition need to be check as it is tie condition");
+        }
+
+        semifinalWinner.push(tempObj);
+
         semifinalDraw.push(<div>{`${firstTeam} -vs- ${Object.keys(team)[0]} ${round1Score1 + ':' + round1Score2} ${round2Score1 + ':' + round2Score2}`}</div>);
       }
 
@@ -311,6 +329,23 @@ const App = () => {
     });
         
     return <section className="top16-draw">{semifinalDraw}</section>;
+  }
+
+  const finalDraw = () => {
+
+    let finalDraw = [];
+    let firstTeam;
+
+    semifinalWinner.map((team, index) => {
+      
+      if(index%2 !== 0) {
+        finalDraw.push(<div>{`${firstTeam} -vs- ${Object.keys(team)[0]}`}</div>);
+      }
+
+      firstTeam = Object.keys(team)[0];
+    });
+        
+    return <section className="top16-draw">{finalDraw}</section>;
   }
 
   return (
@@ -350,7 +385,11 @@ const App = () => {
       <h3>******** Semifinal Result *********</h3>
       <div className="groups">
         {renderSemifinalResult()}
-      </div> 
+      </div>
+      <h3>******** Final Draw *********</h3>
+      <div className="groups">
+        {finalDraw()}
+      </div>
     </div>
   );
 }
