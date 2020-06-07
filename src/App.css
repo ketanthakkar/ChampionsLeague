@@ -1,0 +1,20 @@
+h3 {
+  margin-top: 2rem;
+}
+
+.groups {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.group {
+  padding: 5px 10px;
+}
+
+.score-data {
+  padding: 1.5rem;
+}
+
+.top16-draw {
+  padding: 1rem;
+}
