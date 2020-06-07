@@ -290,6 +290,29 @@ const App = () => {
     return <section className="top16-draw">{semifinalDraw}</section>;
   }
 
+  const renderSemifinalResult = () => {
+
+    let semifinalDraw = [];
+    let firstTeam;
+
+    quarterFinalWinner.map((team, index) => {
+      
+      if(index%2 !== 0) {
+
+        let round1Score1 = generateRandom();
+        let round1Score2 = generateRandom();
+        let round2Score1 = generateRandom();
+        let round2Score2 = generateRandom();
+
+        semifinalDraw.push(<div>{`${firstTeam} -vs- ${Object.keys(team)[0]} ${round1Score1 + ':' + round1Score2} ${round2Score1 + ':' + round2Score2}`}</div>);
+      }
+
+      firstTeam = Object.keys(team)[0];
+    });
+        
+    return <section className="top16-draw">{semifinalDraw}</section>;
+  }
+
   return (
     <div className="App">
       <h3>****** Group Stage Draw ******</h3>
@@ -323,6 +346,10 @@ const App = () => {
       <h3>******** Semifinal Draw *********</h3>
       <div className="groups">
         {renderSemifinalDraw()}
+      </div> 
+      <h3>******** Semifinal Result *********</h3>
+      <div className="groups">
+        {renderSemifinalResult()}
       </div> 
     </div>
   );
